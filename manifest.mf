@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: be.stanhebben.xjmp
+OpenIDE-Module-Implementation-Version: 0
+OpenIDE-Module-Layer: be/stanhebben/xjmp/layer.xml
+OpenIDE-Module-Localizing-Bundle: be/stanhebben/xjmp/Bundle.properties
+

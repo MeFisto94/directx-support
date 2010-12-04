@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title>X2JME Package</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <p>X2JME is written as a way to directly convert DirectX mesh files to binary
+            jME documents. It can be used as library, as command-line tool or as
+            AssetLoader in a jME project.</p>
+        <p>Currently, not all features are supported. The supported templates are
+            <code>Frame</code>, <code>FrameTransformMatrix</code>, <code>Material</code>,
+            <code>Mesh</code>, <code>MeshMaterialList</code>, <code>MeshNormals</code>,
+            <code>MeshTextureCoords</code> and <code>TextureFilename</code>. This
+            is enough to support all regular models, but not animations.</p>
+        <p>Custom templates are not supported, and all template definitions and
+            unsupported template instances will be skipped.</p>
+        <h1>Command - line usage</h1>
+        <p>When used as command-line tool, X2JME can be used to convert files or folders.
+            When a folder is converted, all .x files in the folder and its subfolders
+            will be converted.</p>
+        <p>To use X2JME as command - line tool, use the <code>java -jar x2jme.jar &lt;arguments&gt;</code>
+            command. The supported arguments are:</p>
+        <ul>
+            <li><code>-adir &lt;directory&gt;</code>: sets the assets directory (default: assets)</li>
+            <li><code>-file &lt;file&gt;</code>: sets the source file or directory to convert, refers to a file or
+                directory inside the assets directory. (default: whole assets directory)</li>
+            <li><code>-dtex &lt;file&gt;</code>: sets the default texture. Refers to a file inside the
+                assets directory. (default: none)</li>
+            <li><code>-help, -h</code>: shows command-line help</li>
+        </ul>
+        <p>Example: <code>java -jar xjme.jar -adir myassets -file models -dtex dummy.bmp</code></p>
+        <p>In this example, the assets directory is <code>myassets</code>, all .x files in the
+            <code>myassets/models</code> directory will be converted, and the
+            default texture is <code>myassets/dummy.bmp</code></p>
+        <p>If you notice any bugs, please let me know (<code>x2jme.sourceforge.net</code>). If
+            you want any additional features, you can send me a mail too. If you
+            request an additional feature, make sure you supply a set of DirectX
+            files to test that feature.</p>
+        <h1>Library usage</h1>
+        <p>When used as library, X2JME can be used to dynamically read and convert
+            DirectX files. In that case, XFile is the class you want to look at.</p>
+        <p>A DirectX file can be read easily by constructing an <code>XFile</code> instance and
+            calling <code>toNode()</code> on it.</p>
+        <h1>AssetLoader usage</h1>
+        <p>Register <code>XImporter</code> as loader for .x files.</p>
+        <h1>Internal operation</h1>
+        <p>When a .x file is read, its first 16 bytes (the header) are processed.
+            Then, a binary or text token stream is constructed and parsed by an
+            LL parser.</p>
+        <p>To keep the X2JME logic simple, templates are hard-coded. Each template
+            has its own template class. Template classes are in the
+            <code>be.stanhebben.x2jme.template</code> package. Templates create
+            data object instances when instantiated. Data item classes reside in the
+            <code>be.stanhebben.x2jme.data</code> package. Template definitions
+            and unsupported templates are skipped silently.</p>
+        <h1>Defining new templates</h1>
+        <p>To add new templates, a template and data class has to be written and
+            the XTemplate class must be modified to support the new template.</p>
+        @see be.stanhebben.x2jme.X2JME
+    </body>
+</html>
